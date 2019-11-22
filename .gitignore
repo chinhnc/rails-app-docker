@@ -61,6 +61,9 @@ node_modules/
 /public/packs-test
 /public/assets
 
+# Ignore uploaded test images.
+/public/uploads
+
 # Ignore yarn files
 /yarn-error.log
 yarn-debug.log*
