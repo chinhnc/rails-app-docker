@@ -103,4 +103,15 @@ class UserTest < ActiveSupport::TestCase
       assert_not michael.feed.include?(post_unfollowed)
     end
   end
+
+  test "associated comments should be destroyed" do
+    @user.save
+    @micropost = @user.microposts.create!(content: "Lorem ipsum")
+    @other_user = User.create!(name: "Example User 1", email: "user1@example.com",
+                     password: "foobar", password_confirmation: "foobar")
+    @other_user.comments.create!(content: "Lorem ipsum", micropost_id: @micropost.id)
+    assert_difference 'Comment.count', -1 do
+      @other_user.destroy
+    end
+  end
 end
